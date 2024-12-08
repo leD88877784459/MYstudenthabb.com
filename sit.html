@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация и авторизация</title>
+    <style>
+        /* Основные стили */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white;
+            text-align: center;
+            background: url('image0_0.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        /* Полупрозрачный контейнер */
+        .container, .sitePage {
+            background: rgba(0, 0, 0, 0.781);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.733);
+            width: 90%;
+            max-width: 400px;
+            margin: 100px auto;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        /* Стили для полей ввода */
+        input {
+            width: 90%;
+            margin: 10px 0;
+            padding: 12px;
+            border: none;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.8);
+            color: #333;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        input:focus {
+            box-shadow: 0 0 10px #00ffcc;
+        }
+
+        /* Стили для кнопок */
+        button {
+            width: 90%;
+            padding: 12px;
+            margin: 10px 0;
+            background: linear-gradient(90deg, #00ffcc, #00b894);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            background: linear-gradient(90deg, #00b894, #00ffcc);
+        }
+
+        /* Ссылки */
+        a {
+            color: #00ffcc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #00b894;
+        }
+
+        /* Анимация появления */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Стили главной страницы */
+        .sitePage {
+            display: none;
+        }
+
+        .avatar-container img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 4px solid #00ffcc;
+            margin: 20px 0;
+        }
+
+        .avatar-container label {
+            display: inline-block;
+            background: #00ffcc;
+            padding: 10px 20px;
+            color: black;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+        .header {
+    background: rgb(0, 0, 0);
+    color: white;
+    font-size: 2rem;
+    padding: 20px;
+    text-align: left;
+    position: fixed; /* Фиксированное расположение */
+    top: 0; /* Прижимаем к верху */
+    left: 0;
+    width: 100%; /* Полная ширина страницы */
+    z-index: 1000; /* Поверх всех остальных элементов */
+    margin: 0;
+}
+
+        .avatar-container label:hover {
+            background: #00b894;
+        }
+
+        /* Для адаптивности */
+        @media (max-width: 768px) {
+            .container, .sitePage {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Шапка -->
+<div class="header">STUDENT HUB</div>
+
+    <!-- Авторизация и регистрация -->
+    <div id="authContainer" class="container">
+        <h1>Добро пожаловать!</h1>
+        <div id="loginForm">
+            <input type="text" id="loginName" placeholder="Имя">
+            <input type="password" id="loginCode" placeholder="Код доступа">
+            <button onclick="login()">Войти</button>
+            <p>Нет аккаунта? <a href="#" onclick="showRegister()">Регистрация</a></p>
+            <p id="loginError" style="color: red; display: none;">Неверный код!</p>
+        </div>
+
+        <div id="registerForm" style="display: none;">
+            <input type="text" id="regName" placeholder="Имя">
+            <input type="password" id="regCode" placeholder="Код доступа">
+            <button onclick="register()">Зарегистрироваться</button>
+            <p>Уже есть аккаунт? <a href="#" onclick="showLogin()">Войти</a></p>
+            <p id="registerSuccess" style="color: lime; display: none;">Успешно зарегистрировано!</p>
+        </div>
+    </div>
+
+    <!-- Главная страница -->
+    <div id="sitePage" class="sitePage">
+        <h1>Здравствуйте, <span id="userName"></span>!</h1>
+        <div class="avatar-container">
+            <img id="avatar" src="https://via.placeholder.com/100" alt="Аватар">
+            <input type="file" id="avatarInput" accept="image/*" onchange="changeAvatar(event)" style="display: none;">
+            <label for="avatarInput">Загрузить аватар</label>
+        </div>
+        <button onclick="logout()">Выйти</button>
+    </div>
+
+    <script>
+        function showRegister() {
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('registerForm').style.display = 'block';
+        }
+
+        function showLogin() {
+            document.getElementById('registerForm').style.display = 'none';
+            document.getElementById('loginForm').style.display = 'block';
+        }
+
+        function register() {
+            const name = document.getElementById('regName').value;
+            const code = document.getElementById('regCode').value;
+            localStorage.setItem('userName', name);
+            localStorage.setItem('accessCode', code);
+            document.getElementById('registerSuccess').style.display = 'block';
+        }
+
+        function login() {
+    const name = document.getElementById('loginName').value.trim();
+    const code = document.getElementById('loginCode').value.trim();
+
+    if (name === localStorage.getItem('userName') && code === localStorage.getItem('accessCode')) {
+        localStorage.setItem('currentUser', name); // Сохраняем текущего пользователя
+        window.location.href = "SSS.html"; // Переход на главную страницу
+    } else {
+        document.getElementById('loginError').style.display = 'block';
+        document.getElementById('loginError').innerText = "Неверное имя или код доступа!";
+    }
+}
+
+        function changeAvatar(event) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                document.getElementById('avatar').src = e.target.result;
+                localStorage.setItem('avatar', e.target.result);
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+
+        function logout() {
+            document.getElementById('authContainer').style.display = 'block';
+            document.getElementById('sitePage').style.display = 'none';
+        }
+
+        window.onload = () => {
+            const savedAvatar = localStorage.getItem('avatar');
+            if (savedAvatar) document.getElementById('avatar').src = savedAvatar;
+        };
+    </script>
+</body>
+</html>

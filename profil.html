@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Профиль студента</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f0f0;
+      color: #333;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      background: #fff;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      padding: 20px;
+    }
+
+    .profile-header {
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid #e0e0e0;
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+    }
+
+    .avatar {
+      position: relative;
+      margin-right: 20px;
+    }
+
+    .avatar img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 3px solid #ccc;
+    }
+
+    .change-avatar {
+      background: #000;
+      color: #fff;
+      padding: 6px 10px;
+      font-size: 12px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .change-avatar:hover {
+      background: #555;
+    }
+
+    .profile-info {
+      flex: 1;
+    }
+
+    .profile-info h1 {
+      margin: 0;
+      font-size: 1.8em;
+      color: #000;
+      cursor: pointer;
+    }
+
+    .profile-info h1:hover {
+      color: #3498db;
+    }
+
+    .points {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .points span {
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+
+    .edit-button {
+      background: #000;
+      color: #fff;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .edit-button:hover {
+      background: #555;
+    }
+
+    .profile-section {
+      margin-bottom: 20px;
+    }
+
+    .profile-section h2 {
+      font-size: 1.2em;
+      color: #000;
+    }
+
+    .profile-section p {
+      font-size: 1em;
+      color: #555;
+    }
+
+    .profile-section ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .profile-section li {
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .progress-bar {
+      width: 70%;
+      height: 10px;
+      background: #e0e0e0;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .progress {
+      height: 100%;
+      background: #3498db;
+      transition: width 0.3s ease;
+    }
+  </style>
+</head>
+<body onload="loadProfileData()">
+  <div class="container">
+    <div class="profile-header">
+      <div class="avatar">
+        <img src="aa.png" alt="Аватар" id="avatar">
+        <input type="file" id="avatarInput" style="display: none;" onchange="changeAvatar()">
+        <button class="change-avatar" onclick="document.getElementById('avatarInput').click()">Изменить аватар</button>
+      </div>
+      <div class="profile-info" onclick="editNickname()">
+        <h1 id="profileinfo">Студент Иван Иванов</h1>
+        <div class="points">
+          <p>Баллы:</p>
+          <span id="balance">100</span>
+          <button class="edit-button" onclick="editBalance()">✏</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="profile-section">
+      <h2>Контакты</h2>
+      <p><strong>Телефон:</strong> <span id="phone">+7 999 123-45-67</span></p>
+      <p><strong>Email:</strong> <span id="email">student@email.com</span></p>
+      <button class="edit-button" onclick="editContacts()">✏</button>
+    </div>
+
+    <div class="profile-section">
+      <h2>Навыки</h2>
+      <ul id="skills">
+        <li>
+          <span>HTML</span>
+          <div class="progress-bar">
+            <div class="progress" style="width: 60%;"></div>
+          </div>
+        </li>
+        <li>
+          <span>Python</span>
+          <div class="progress-bar">
+            <div class="progress" style="width: 80%;"></div>
+          </div>
+        </li>
+        <li>
+          <span>JavaScript</span>
+          <div class="progress-bar">
+            <div class="progress" style="width: 70%;"></div>
+          </div>
+        </li>
+      </ul>
+      <button class="edit-button" onclick="editSkills()">✏</button>
+    </div>
+
+    <div class="profile-section">
+      <h2>Опыт работы</h2>
+      <ul id="experience">
+        <li>ООО «Разработка» — Разработчик веб-приложений (2021-2023)</li>
+        <li>ООО «СтудПроект» — Фронтенд-разработчик (2020)</li>
+      </ul>
+      <button class="edit-button" onclick="editExperience()">✏</button>
+    </div>
+  </div>
+
+  <script>
+    function loadProfileData() {
+      const avatar = localStorage.getItem('avatar');
+      const nickname = localStorage.getItem('nickname');
+      const balance = localStorage.getItem('balance');
+      const phone = localStorage.getItem('phone');
+      const email = localStorage.getItem('email');
+      const skills = JSON.parse(localStorage.getItem('skills'));
+      const experience = JSON.parse(localStorage.getItem('experience'));
+
+      if (avatar) document.getElementById('avatar').src = avatar;
+      if (nickname) document.getElementById('profileinfo').textContent = nickname;
+      if (balance) document.getElementById('balance').textContent = balance;
+      if (phone) document.getElementById('phone').textContent = phone;
+      if (email) document.getElementById('email').textContent = email;
+      if (skills) {
+        const skillsList = document.getElementById('skills');
+        skillsList.innerHTML = '';
+        skills.forEach(skill => {
+          const li = document.createElement('li');
+          li.innerHTML = `<span>${skill.name}</span><div class="progress-bar"><div class="progress" style="width: ${skill.value}%"></div></div>`;
+          skillsList.appendChild(li);
+        });
+      }
+      if (experience) {
+        const experienceList = document.getElementById('experience');
+        experienceList.innerHTML = '';
+        experience.forEach(exp => {
+          const li = document.createElement('li');
+          li.textContent = exp;
+          experienceList.appendChild(li);
+        });
+      }
+    }
+
+    function changeAvatar() {
+      const avatarInput = document.getElementById('avatarInput');
+      const file = avatarInput.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          document.getElementById('avatar').src = e.target.result;
+          localStorage.setItem('avatar', e.target.result);
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function editNickname() {
+      const nickname = prompt("Введите новый никнейм:", document.getElementById('profileinfo').textContent);
+      if (nickname) {
+        document.getElementById('profileinfo').textContent = nickname;
+        localStorage.setItem('nickname', nickname);
+      }
+    }
+
+    function editBalance() {
+      const balance = prompt("Введите новый баланс:", document.getElementById('balance').textContent);
+      if (balance) {
+        document.getElementById('balance').textContent = balance;
+        localStorage.setItem('balance', balance);
+      }
+    }
+
+    function editContacts() {
+      const phone = prompt("Введите новый номер телефона:", document.getElementById('phone').textContent);
+      const email = prompt("Введите новый email:", document.getElementById('email').textContent);
+      if (phone) document.getElementById('phone').textContent = phone;
+      if (email) document.getElementById('email').textContent = email;
+      localStorage.setItem('phone', phone);
+      localStorage.setItem('email', email);
+    }
+
+    function editSkills() {
+      const newSkills = prompt("Введите навыки (например, HTML:60, Python:80):");
+      if (newSkills) {
+        const skillsArray = newSkills.split(',').map(skill => {
+          const [name, value] = skill.split(':');
+          return { name: name.trim(), value: parseInt(value.trim()) };
+        });
+
+        const skillsList = document.getElementById('skills');
+        skillsList.innerHTML = '';
+        skillsArray.forEach(skill => {
+          const li = document.createElement('li');
+          li.innerHTML = `<span>${skill.name}</span><div class="progress-bar"><div class="progress" style="width: ${skill.value}%"></div></div>`;
+          skillsList.appendChild(li);
+        });
+
+        localStorage.setItem('skills', JSON.stringify(skillsArray));
+      }
+    }
+
+    function editExperience() {
+      const newExperience = prompt("Введите новый опыт работы через запятую (например, Компания — Должность):");
+      if (newExperience) {
+        const experienceArray = newExperience.split(',').map(exp => exp.trim());
+        const experienceList = document.getElementById('experience');
+        experienceList.innerHTML = '';
+        experienceArray.forEach(exp => {
+          const li = document.createElement('li');
+          li.textContent = exp;
+          experienceList.appendChild(li);
+        });
+
+        localStorage.setItem('experience', JSON.stringify(experienceArray));
+      }
+    }
+  </script>
+</body>
+</html>

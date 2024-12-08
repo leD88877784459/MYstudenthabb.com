@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Лучшие университеты 2024</title>
+  <style>
+    /* Общие стили */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      color: #fff;
+      background: #1a1a1a;
+      background: url('image0_0.jpg');
+    }
+
+    /* Шапка */
+    header {
+      background: rgb(0, 0, 0);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .logo {
+      font-size: 2rem;
+      letter-spacing: 2px;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin-right: 40px;
+      font-size: 1rem;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #ffa500;
+    }
+
+    /* Главный блок с фоном */
+    .hero {
+      background: url('your-image.jpg') no-repeat center center/cover;
+      height: 100vh;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1;
+    }
+
+    .hero h1,
+    .hero p {
+      position: relative;
+      z-index: 2;
+      color: #fff;
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+    }
+
+    .hero p {
+      font-size: 1.5rem;
+      opacity: 0.9;
+    }
+
+    /* Карточки */
+    .cards-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      background: rgba(0, 0, 0, 0.26);
+      margin: 40px 20px;
+    }
+
+    .card {
+      background: linear-gradient(135deg, #ffa500, #ff6347);
+      color: #333;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 10px 10px rgba(0, 0, 0, 0.426);
+      width: 250px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.4);
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+    }
+
+    .card p {
+      font-size: 0.9rem;
+    }
+
+    /* Рамка и аватар */
+    .avatar-container {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .avatar-frame-container {
+      position: relative;
+      width: 60px;
+      height: 60px;
+    }
+
+    .avatar {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .frame {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+    }
+
+    .nickname {
+      color: rgb(255, 255, 255);
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    /* Нижний блок */
+    footer {
+      background: #000;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      margin-top: 20px;
+    }
+    .profile-icon {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      cursor: pointer;
+      border-radius: 50%;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    .profile-icon img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+    }
+  </style>
+</head>
+<body onload="loadProfileData()">
+    <!-- Шапка -->
+    <header>
+        <div class="logo">STUDENT HUB</div>
+        <nav>
+            <a href="news.html">Новости</a>
+            <a href="rating.html">Рейтинг</a>
+            <a href="store.html">Магазин</a>
+            <a href="USLUG.html">Услуги и Обшения</a>
+            <a href="project.html">Проект и объявлении</a>
+            <a href="practice.html">Практика</a>
+        </nav>
+        <div class="profile-icon">
+            <img src="aa.png" alt="Иконка профиля" onclick="window.location.href='profil.html';">
+        </div>
+    </header>
+
+    <!-- Главный блок -->
+    <div class="hero">
+        <h1>STUDENT HUB </h1>
+        <p>Единая платформа - которая объединит возможности поиска услуг, обмена вещами
+            и организации совместного досуга, улучшив социальную жизнь студентов.</p>
+    </div>
+
+    <!-- Карточки -->
+    <div class="cards-container">
+        <div class="card">
+            <h3>Интенсивность:</h3>
+            <p>основная характеристика хакатонов — ограниченное по времени рабочее время над проектами. Участникам нужно сосредоточиться и быстро генерировать идеи, разрабатывать решения и презентовать их.
+            </p>
+        </div>
+        <div class="card">
+            <h3>Командная работа:</h3>
+            <p>участники часто работают в командах, что способствует обмену знаниями и навыками между разными специалистами, такими как программисты, дизайнеры и бизнес-аналитики.
+            </p>
+        </div>
+        <div class="card">
+            <h3>Тематика:</h3>
+            <p> Хакатоны могут быть тематическими, например, по разработке программного обеспечения для здравоохранения, финансовых технологий, искусственного интеллекта или других направлений. Иногда проводятся специальные хакатоны для стартапов или на основе данных от организаций.
+            </p>
+        </div>
+        <div class="card">
+            <h3>Призы и награды:</h3>
+            <p>на большинстве хакатонов участники соревнуются за различные призы — от денег и ценных подарков до возможности продолжить работу над проектом в компании-партнёре или с инвесторами.</p>
+        </div>
+    </div>
+
+    <script>
+        let balance = localStorage.getItem('balance') ? parseInt(localStorage.getItem('balance')) : 100;  // Загружаем баланс из LocalStorage, если он есть
+
+        // Функция для покупки рамки
+        function buyFrame(frameSrc, price) {
+            if (balance >= price) {
+                balance -= price;
+                document.getElementById('balance').innerText = balance; // Обновление баланса
+                document.getElementById('frame-img').src = frameSrc; // Установка рамки поверх аватарки
+
+                // Сохраняем рамку и баланс в LocalStorage
+                localStorage.setItem('selectedFrame', frameSrc);
+                localStorage.setItem('balance', balance);
+
+                alert("Рамка успешно установлена!");
+            } else {
+                alert("Недостаточно баллов!");
+            }
+        }
+
+        // Показ/скрытие контактов
+        function toggleContacts(button) {
+            const contactInfo = button.nextElementSibling;
+            contactInfo.style.display = contactInfo.style.display === "none" || contactInfo.style.display === "" ? "block" : "none";
+            button.textContent = contactInfo.style.display === "block" ? "Скрыть контакты" : "Контакты";
+        }
+
+        // Применение рамки и баланса при загрузке страницы
+        window.onload = function() {
+            const selectedFrame = localStorage.getItem('selectedFrame');
+            if (selectedFrame) {
+                document.getElementById('frame-img').src = selectedFrame;
+            }
+            document.getElementById('balance').innerText = balance;  // Обновляем баланс при загрузке
+        };
+
+        // Загружаем данные профиля
+        function loadProfileData() {
+            // Загружаем данные из localStorage
+            const avatar = localStorage.getItem('avatar');
+            const nickname = localStorage.getItem('nickname');
+            const balance = localStorage.getItem('balance');
+            const phone = localStorage.getItem('phone');
+            const email = localStorage.getItem('email');
+            const skills = JSON.parse(localStorage.getItem('skills'));
+            const experience = JSON.parse(localStorage.getItem('experience'));
+
+            if (avatar) {
+                document.getElementById('avatar').src = avatar;
+            }
+            if (nickname) {
+                document.getElementById('profileinfo').textContent = nickname;
+            }
+            if (balance) {
+                document.getElementById('balance').textContent = balance;
+            }
+            if (phone) {
+                document.getElementById('phone').textContent = phone;
+            }
+            if (email) {
+                document.getElementById('email').textContent = email;
+            }
+            if (skills) {
+                const skillsList = document.getElementById('skills');
+                skillsList.innerHTML = '';
+                skills.forEach((skill) => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `<span>${skill.name}</span>
+                        <div class="progress-bar"><div class="progress" style="width: ${skill.value}%"></div></div>`;
+                    skillsList.appendChild(li);
+                });
+            }
+            if (experience) {
+                const experienceList = document.getElementById('experience');
+                experienceList.innerHTML = '';
+                experience.forEach((exp) => {
+                    const li = document.createElement('li');
+                    li.textContent = exp;
+                    experienceList.appendChild(li);
+                });
+            }
+        }
+    </script>
+
+    <!-- Подвал -->
+    <footer>
+        &copy; 2024 STUDENT HUB | Все права защищены
+    </footer>
+</body>
+</html>

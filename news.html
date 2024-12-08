@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Новости</title>
+    <style>
+        /* Удаляем белые полосы вокруг страницы */
+html, body {
+    margin: 0;
+    padding: 0px;
+    height: 100%;
+    overflow-x: hidden; /* Убираем горизонтальный скролл */
+    box-sizing: border-box;
+}
+
+/* Градиентный фон для всего сайта */
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), 
+                url('News.jpg') no-repeat center center fixed;
+    background-size: cover;
+    margin: 0;
+    padding-top: 80px;
+    color: #fff;
+}
+.header {
+    background: rgb(0, 0, 0);
+    color: white;
+    font-size: 2rem;
+    padding: 20px;
+    text-align: left;
+    position: fixed; /* Фиксированное расположение */
+    top: 0; /* Прижимаем к верху */
+    left: 0;
+    width: 100%; /* Полная ширина страницы */
+    z-index: 1000; /* Поверх всех остальных элементов */
+    margin: 0;
+}
+/* Основной контейнер */
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* Заголовок */
+.news-header {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+    color: #ffffff;
+    text-shadow: 2px 2px 10px #000;
+}
+
+/* Сетка новостей */
+.news-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 30px;
+}
+
+/* Большая новость */
+.main-news {
+    position: relative;
+    border-radius: 12px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+.main-news img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    transition: transform 0.3s ease-in-out;
+}
+
+.main-news:hover img {
+    transform: scale(1.05);
+}
+
+.main-news .content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    color: white;
+    text-align: left;
+    border-top: 2px solid #ffffff;
+}
+
+.main-news .content h2 {
+    font-size: 1.8rem;
+    margin: 0 0 5px;
+}
+
+.main-news .content p {
+    font-size: 1rem;
+}
+
+/* Маленькие новости */
+.small-news {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.small-news-item {
+    display: flex;
+    background: linear-gradient(to right, #333, #222);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease-in-out;
+}
+
+.small-news-item:hover {
+    transform: translateX(10px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+}
+
+.small-news-item img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.small-news-item .content {
+    padding: 10px 15px;
+    color: #fff;
+    flex: 1;
+}
+
+.small-news-item .content h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #ffffff;
+}
+
+.small-news-item .content p {
+    margin: 5px 0 0;
+    font-size: 0.9rem;
+    color: #ddd;
+}
+
+/* Дополнительная информация */
+.news-details {
+    margin-top: 30px;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
+.news-details h2 {
+    margin: 0 0 10px;
+    font-size: 1.5rem;
+    color: #ffffff;
+}
+.profile-icon {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  border-radius: 50%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.profile-icon img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+.profile-icon {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  border-radius: 50%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.profile-icon img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+.contact-info {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-contacts {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .btn-contacts:hover {
+            background-color: #0056b3;
+        }
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
+    </style>
+</head>
+<body>
+    <!-- Шапка -->
+    <div class="header">STUDENT HUB</div>
+ <div class="profile-icon">
+    <img src="aa.png" alt="Иконка профиля" onclick="window.location.href='profil.html';">
+  </div>
+    <div class="container">
+        <div class="news-header">Новости</div>
+    
+        <!-- Сетка новостей -->
+        <div class="news-grid">
+            <!-- Большая новость -->
+            <div class="main-news" id="main-news">
+                <img id="main-news-img" src="https://cdn.gencraft.com/prod/user/57da06d0-621c-4d53-863e-5926738df143/c19672a8-ae14-43c3-970f-1e99a2f8b08f/image/image1_0.jpg?Expires=1741356007&Signature=OxCTg7I3qNJnUc~D-VU-vMQ00ULyNMl6uB6Oaa-0qz5hJeCd~FNKVkAOvZFt9dVrCTJEC3T0ihyqmLbHhLWdqrOmX1Vub6tRcYW59FoArh~ClGu9LIFBympuGSvAJe7BDBJmbnlkmDjW17UtLek850ok~qQQv3OkvnaRvcAp~YxDPUXD~DQ4mRK~COUjN33uu8EM3IwmbglDano46gvJiUIDEUHAHFln2Ly9TeFbv9sUxbjXJcDMvA69myVC73lmmUQ9WGaX6V97yE8dw~YABbxQtdN2XY-iPioR4Q4Z6b547C9fRIlNwfST4B~ftReZBWUVelO5qisgHIQ~CcDYpQ__&Key-Pair-Id=K3RDDB1TZ8BHT8" alt="Main News">
+                <div class="content">
+                    <h2 id="main-news-title">Первый и самый срочный</h2>
+                    <p id="main-news-date">Сегодня, 09:27</p>
+                    <p id="main-news-details">Это главная новость, содержащая самую срочную информацию.</p>
+                </div>
+            </div>
+
+      <!-- Маленькие новости -->
+            <div class="small-news">
+                <!-- Новость 2 -->
+                <div class="small-news-item" onclick="updateMainNews('Новость 1', 'Вчера, 22:40', 'Это подробная информация о Первый новости.', 'https://cdn.gencraft.com/prod/user/57da06d0-621c-4d53-863e-5926738df143/c19672a8-ae14-43c3-970f-1e99a2f8b08f/image/image1_0.jpg?Expires=1741356007&Signature=OxCTg7I3qNJnUc~D-VU-vMQ00ULyNMl6uB6Oaa-0qz5hJeCd~FNKVkAOvZFt9dVrCTJEC3T0ihyqmLbHhLWdqrOmX1Vub6tRcYW59FoArh~ClGu9LIFBympuGSvAJe7BDBJmbnlkmDjW17UtLek850ok~qQQv3OkvnaRvcAp~YxDPUXD~DQ4mRK~COUjN33uu8EM3IwmbglDano46gvJiUIDEUHAHFln2Ly9TeFbv9sUxbjXJcDMvA69myVC73lmmUQ9WGaX6V97yE8dw~YABbxQtdN2XY-iPioR4Q4Z6b547C9fRIlNwfST4B~ftReZBWUVelO5qisgHIQ~CcDYpQ__&Key-Pair-Id=K3RDDB1TZ8BHT8')">
+                    <img src="https://cdn.gencraft.com/prod/user/57da06d0-621c-4d53-863e-5926738df143/c19672a8-ae14-43c3-970f-1e99a2f8b08f/image/image1_0.jpg?Expires=1741356007&Signature=OxCTg7I3qNJnUc~D-VU-vMQ00ULyNMl6uB6Oaa-0qz5hJeCd~FNKVkAOvZFt9dVrCTJEC3T0ihyqmLbHhLWdqrOmX1Vub6tRcYW59FoArh~ClGu9LIFBympuGSvAJe7BDBJmbnlkmDjW17UtLek850ok~qQQv3OkvnaRvcAp~YxDPUXD~DQ4mRK~COUjN33uu8EM3IwmbglDano46gvJiUIDEUHAHFln2Ly9TeFbv9sUxbjXJcDMvA69myVC73lmmUQ9WGaX6V97yE8dw~YABbxQtdN2XY-iPioR4Q4Z6b547C9fRIlNwfST4B~ftReZBWUVelO5qisgHIQ~CcDYpQ__&Key-Pair-Id=K3RDDB1TZ8BHT8" alt="News 1">
+                    <div class="content">
+                        <h3>Новость 1</h3>
+                        <p>Вчера, 22:40</p>
+                    </div>
+                </div>
+          
+            <div class="small-news">
+                <!-- Новость 2 -->
+                <div class="small-news-item" onclick="updateMainNews('Новость 2', 'Вчера, 22:40', 'Это подробная информация о второй новости.', 'https://cdn.gencraft.com/prod/user/bff6f193-56a1-41ca-b364-14bc7286962e/72c6e82d-bf09-4af0-a3fa-fc255cc4c761/image/image0_0.jpg?Expires=1741355935&Signature=KcyRVp-XQmsqfSsYUtpA8U1WMdgBXm9aAEkQ5bpDIOM591JjkgKUd4N7R2psGIRaOsuLuNHNFkaSbxjlQgzMIFOsSLcTUUxP1gLuSTygHPHg~1dwAROhBPeb5Cpd8Vlk1OSA6LscxlDtul8hvXoYZfuxQALIocHX~VWQkAL87qzC8E5HyGNZhSjxC2tNaBDrsP9mFJTgljXuHqRbuYpgPph2oAgwHSqL-CPUTaWkCv7sgrn6TrDz0lVb-YrMJ9msjgK6hUca1AHdT78mxO6TkNa2JPI9jzu2F57Sf8Y1nphGEs6Qrsz2FQT19uOoqEBO4i6Bcg4KkpD7e-2P2Q2BVA__&Key-Pair-Id=K3RDDB1TZ8BHT8')">
+                    <img src="https://cdn.gencraft.com/prod/user/bff6f193-56a1-41ca-b364-14bc7286962e/72c6e82d-bf09-4af0-a3fa-fc255cc4c761/image/image0_0.jpg?Expires=1741355935&Signature=KcyRVp-XQmsqfSsYUtpA8U1WMdgBXm9aAEkQ5bpDIOM591JjkgKUd4N7R2psGIRaOsuLuNHNFkaSbxjlQgzMIFOsSLcTUUxP1gLuSTygHPHg~1dwAROhBPeb5Cpd8Vlk1OSA6LscxlDtul8hvXoYZfuxQALIocHX~VWQkAL87qzC8E5HyGNZhSjxC2tNaBDrsP9mFJTgljXuHqRbuYpgPph2oAgwHSqL-CPUTaWkCv7sgrn6TrDz0lVb-YrMJ9msjgK6hUca1AHdT78mxO6TkNa2JPI9jzu2F57Sf8Y1nphGEs6Qrsz2FQT19uOoqEBO4i6Bcg4KkpD7e-2P2Q2BVA__&Key-Pair-Id=K3RDDB1TZ8BHT8" alt="News 2">
+                    <div class="content">
+                        <h3>Новость 2</h3>
+                        <p>Вчера, 22:40</p>
+                    </div>
+                </div>
+    
+                <!-- Новость 3 -->
+                <div class="small-news-item" onclick="updateMainNews('Новость 3', 'Вчера, 21:41', 'Это подробная информация о третьей новости.', 'https://cdn.gencraft.com/prod/user/bff6f193-56a1-41ca-b364-14bc7286962e/72c6e82d-bf09-4af0-a3fa-fc255cc4c761/image/image0_0.jpg?Expires=1741355935&Signature=KcyRVp-XQmsqfSsYUtpA8U1WMdgBXm9aAEkQ5bpDIOM591JjkgKUd4N7R2psGIRaOsuLuNHNFkaSbxjlQgzMIFOsSLcTUUxP1gLuSTygHPHg~1dwAROhBPeb5Cpd8Vlk1OSA6LscxlDtul8hvXoYZfuxQALIocHX~VWQkAL87qzC8E5HyGNZhSjxC2tNaBDrsP9mFJTgljXuHqRbuYpgPph2oAgwHSqL-CPUTaWkCv7sgrn6TrDz0lVb-YrMJ9msjgK6hUca1AHdT78mxO6TkNa2JPI9jzu2F57Sf8Y1nphGEs6Qrsz2FQT19uOoqEBO4i6Bcg4KkpD7e-2P2Q2BVA__&Key-Pair-Id=K3RDDB1TZ8BHT8')">
+                    <img src="https://cdn.gencraft.com/prod/user/bff6f193-56a1-41ca-b364-14bc7286962e/72c6e82d-bf09-4af0-a3fa-fc255cc4c761/image/image0_0.jpg?Expires=1741355935&Signature=KcyRVp-XQmsqfSsYUtpA8U1WMdgBXm9aAEkQ5bpDIOM591JjkgKUd4N7R2psGIRaOsuLuNHNFkaSbxjlQgzMIFOsSLcTUUxP1gLuSTygHPHg~1dwAROhBPeb5Cpd8Vlk1OSA6LscxlDtul8hvXoYZfuxQALIocHX~VWQkAL87qzC8E5HyGNZhSjxC2tNaBDrsP9mFJTgljXuHqRbuYpgPph2oAgwHSqL-CPUTaWkCv7sgrn6TrDz0lVb-YrMJ9msjgK6hUca1AHdT78mxO6TkNa2JPI9jzu2F57Sf8Y1nphGEs6Qrsz2FQT19uOoqEBO4i6Bcg4KkpD7e-2P2Q2BVA__&Key-Pair-Id=K3RDDB1TZ8BHT8" alt="News 3">
+                    <div class="content">
+                        <h3>Новость 3</h3>
+                        <p>Вчера, 21:41</p>
+                    </div>
+                </div>
+    
+                <!-- Новость 4 -->
+                <div class="small-news-item" onclick="updateMainNews('Новость 4', 'Вчера, 21:18', 'Это подробная информация о четвёртой новости.', 'https://cdn.gencraft.com/prod/user/bff6f193-56a1-41ca-b364-14bc7286962e/72c6e82d-bf09-4af0-a3fa-fc255cc4c761/image/image0_0.jpg?Expires=1741355935&Signature=KcyRVp-XQmsqfSsYUtpA8U1WMdgBXm9aAEkQ5bpDIOM591JjkgKUd4N7R2psGIRaOsuLuNHNFkaSbxjlQgzMIFOsSLcTUUxP1gLuSTygHPHg~1dwAROhBPeb5Cpd8Vlk1OSA6LscxlDtul8hvXoYZfuxQALIocHX~VWQkAL87qzC8E5HyGNZhSjxC2tNaBDrsP9mFJTgljXuHqRbuYpgPph2oAgwHSqL-CPUTaWkCv7sgrn6TrDz0lVb-YrMJ9msjgK6hUca1AHdT78mxO6TkNa2JPI9jzu2F57Sf8Y1nphGEs6Qrsz2FQT19uOoqEBO4i6Bcg4KkpD7e-2P2Q2BVA__&Key-Pair-Id=K3RDDB1TZ8BHT8')">
+                    <img src="https://cdn.gencraft.com/prod/user/bff6f193-56a1-41ca-b364-14bc7286962e/72c6e82d-bf09-4af0-a3fa-fc255cc4c761/image/image0_0.jpg?Expires=1741355935&Signature=KcyRVp-XQmsqfSsYUtpA8U1WMdgBXm9aAEkQ5bpDIOM591JjkgKUd4N7R2psGIRaOsuLuNHNFkaSbxjlQgzMIFOsSLcTUUxP1gLuSTygHPHg~1dwAROhBPeb5Cpd8Vlk1OSA6LscxlDtul8hvXoYZfuxQALIocHX~VWQkAL87qzC8E5HyGNZhSjxC2tNaBDrsP9mFJTgljXuHqRbuYpgPph2oAgwHSqL-CPUTaWkCv7sgrn6TrDz0lVb-YrMJ9msjgK6hUca1AHdT78mxO6TkNa2JPI9jzu2F57Sf8Y1nphGEs6Qrsz2FQT19uOoqEBO4i6Bcg4KkpD7e-2P2Q2BVA__&Key-Pair-Id=K3RDDB1TZ8BHT8" alt="News 4">
+                    <div class="content">
+                        <h3>Новость 4</h3>
+                        <p>Вчера, 21:18</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+        <!-- Дополнительная информация -->
+        <div id="news-details" class="news-details">
+            <h2 id="details-title">Рост вовлеченности IT-специалистов в преподавание</h2>
+            <p id="details-content">Крупные IT-компании России, такие как VK и «Яндекс», увеличили число своих сотрудников, преподающих в вузах. В 2024 году около 6–7% профильных специалистов этих компаний совмещали основную работу с преподавательской деятельностью. Однако, несмотря на этот рост, дефицит квалифицированных кадров в отрасли сохраняется. 
+                ВЕДОМОСТИ</p>
+        </div>
+    </div>
+
+    <script>
+        // Функция для отображения дополнительной информации
+        function updateMainNews(title, date, details, imageUrl) {
+    // Обновляем контент большой новости
+    document.getElementById('main-news-title').innerText = title;
+    document.getElementById('main-news-date').innerText = date;
+    document.getElementById('main-news-details').innerText = details;
+    document.getElementById('main-news-img').src = imageUrl;
+}
+        let balance = localStorage.getItem('balance') ? parseInt(localStorage.getItem('balance')) : 100;  // Загружаем баланс из LocalStorage, если он есть
+
+        // Функция для покупки рамки
+        function buyFrame(frameSrc, price) {
+            if (balance >= price) {
+                balance -= price;
+                document.getElementById('balance').innerText = balance; // Обновление баланса
+                document.getElementById('frame-img').src = frameSrc; // Установка рамки поверх аватарки
+
+                // Сохраняем рамку и баланс в LocalStorage
+                localStorage.setItem('selectedFrame', frameSrc);
+                localStorage.setItem('balance', balance);
+
+                alert("Рамка успешно установлена!");
+            } else {
+                alert("Недостаточно баллов!");
+            }
+        }
+
+        // Показ/скрытие контактов
+        function toggleContacts(button) {
+            const contactInfo = button.nextElementSibling;
+            contactInfo.style.display = contactInfo.style.display === "none" || contactInfo.style.display === "" ? "block" : "none";
+            button.textContent = contactInfo.style.display === "block" ? "Скрыть контакты" : "Контакты";
+        }
+
+        // Применение рамки и баланса при загрузке страницы
+        window.onload = function() {
+            const selectedFrame = localStorage.getItem('selectedFrame');
+            if (selectedFrame) {
+                document.getElementById('frame-img').src = selectedFrame;
+            }
+            document.getElementById('balance').innerText = balance;  // Обновляем баланс при загрузке
+        };
+    </script>
+    
+</body>
+</html>

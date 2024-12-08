@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Раздел Практика</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('internship.jpg') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding-top: 80px;
+        }
+
+       /* Шапка */
+.header {
+    background: rgb(0, 0, 0);
+    color: white;
+    font-size: 2rem;
+    padding: 20px;
+    text-align: left;
+    position: fixed; /* Фиксированное расположение */
+    top: 0; /* Прижимаем к верху */
+    left: 0;
+    width: 100%; /* Полная ширина страницы */
+    z-index: 1000; /* Поверх всех остальных элементов */
+    margin: 0;
+}
+
+        /* Фильтры */
+.filters {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    position: fixed; /* Фиксированное расположение */
+    left: 0; /* Прижимаем к левому краю */
+    top: 100px;
+    width: 300px; /* Ширина увеличена до 300px */
+    height: 100%; /* Растягиваем по высоте */
+    z-index: 10;
+}
+
+/* Отступ для содержимого */
+.container {
+    margin-left: 320px; /* Отступ для контейнера, чтобы не перекрывался фильтром */
+    padding: 20px;
+}
+
+
+        /* Карточки вакансий */
+        .job-card {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: box-shadow 0.3s;
+        }
+
+        .job-card:hover {
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .job-details h5 {
+            margin: 0 0 10px;
+            color: #333;
+        }
+
+        .job-details p {
+            margin: 0;
+            color: #777;
+        }
+
+        .contact-info {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-contacts {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .btn-contacts:hover {
+            background-color: #0056b3;
+        }
+        .profile-icon {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  border-radius: 50%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.profile-icon img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+    </style>
+</head>
+<body>
+    <!-- Шапка -->
+    <div class="header">STUDENT HUB</div>
+ <!-- Иконка профиля -->
+ <div class="profile-icon">
+    <img src="aa.png" alt="Иконка профиля" onclick="window.location.href='profil.html';">
+  </div>
+    <!-- Фильтры -->
+    <div class="filters">
+        <h5>Фильтры</h5>
+        <div class="form-group">
+            <label for="region">Регион:</label>
+            <select class="form-control" id="region">
+                <option value="">Все</option>
+                <option value="Алматы">Алматы</option>
+                <option value="Астана">Астана</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="income">Доход:</label>
+            <select class="form-control" id="income">
+                <option value="">Любой</option>
+                <option value="350000">от 350 000 Т</option>
+                <option value="400000">от 400 000 Т</option>
+            </select>
+        </div>
+        <button class="btn btn-primary btn-block" onclick="applyFilters()">Применить</button>
+    </div>
+
+   <!-- Вакансии -->
+    <div class="container" style="margin-left: 300px; margin-top: 50px;">
+        <h2 class="text-center mb-4" style="color: #333; background: rgb(255, 255, 255); padding: 10px; border-radius: 5px;">Раздел Практика</h2>
+
+
+        <!-- Пример карточки -->
+        <div class="job-card" data-region="Алматы" data-income="400000">
+            <div class="job-details">
+                <h5>Практика на ЖенПУ программист-техник</h5>
+                <p>250 000 – 400 000 Т на руки</p>
+                <p>ИП QyzPU, Алматы</p>
+            </div>
+            <button class="btn btn-contacts" onclick="toggleContacts(this)">Контакты</button>
+            <div class="contact-info">
+                <p>WhatsApp: <a href="https://wa.me/77012345678" target="_blank">+7 701 234 5678</a></p>
+                <p>Телефон: <a href="tel:+77012345678">+7 701 234 5678</a></p>
+            </div>
+        </div>
+    
+    <div class="job-card" data-region="Алматы" data-income="350000">
+        <div class="job-details">
+            <h5>Практика на МуИТ программист-техник</h5>
+            <p>от 350 000 Т на руки</p>
+            <p>ИП BAHN TEE STYLE, Алматы</p>
+        </div>
+        <button class="btn btn-contacts" onclick="toggleContacts(this)">Контакты</button>
+        <div class="contact-info">
+            <p>WhatsApp: <a href="https://wa.me/77098765432" target="_blank">+7 709 876 5432</a></p>
+            <p>Телефон: <a href="tel:+77098765432">+7 709 876 5432</a></p>
+        </div>
+    </div>
+
+    
+    <div class="job-card" data-region="Алматы" data-income="350000">
+        <div class="job-details">
+            <h5>Практика на КазНАРУ программист-техник</h5>
+            <p>от 350 000 Т на руки</p>
+            <p>ИП BAHN TEE STYLE, Алматы</p>
+        </div>
+        <button class="btn btn-contacts" onclick="toggleContacts(this)">Контакты</button>
+        <div class="contact-info">
+            <p>WhatsApp: <a href="https://wa.me/77098765432" target="_blank">+7 709 876 5432</a></p>
+            <p>Телефон: <a href="tel:+77098765432">+7 709 876 5432</a></p>
+        </div>
+    </div>
+
+    
+    <div class="job-card" data-region="Астана" data-income="350000">
+        <div class="job-details">
+            <h5>Практика на КазНАФУ программист-техник</h5>
+            <p>от 350 000 Т на руки</p>
+            <p>ИП BAHN TEE STYLE, Астана</p>
+        </div>
+        <button class="btn btn-contacts" onclick="toggleContacts(this)">Контакты</button>
+        <div class="contact-info">
+            <p>WhatsApp: <a href="https://wa.me/77098765432" target="_blank">+7 709 876 5432</a></p>
+            <p>Телефон: <a href="tel:+77098765432">+7 709 876 5432</a></p>
+        </div>
+    </div>
+
+    
+    <div class="job-card" data-region="Алматы" data-income="350000">
+        <div class="job-details">
+            <h5>Практика на  программист-техник</h5>
+            <p>от 350 000 Т на руки</p>
+            <p>ИП BAHN TEE STYLE, Алматы</p>
+        </div>
+        <button class="btn btn-contacts" onclick="toggleContacts(this)">Контакты</button>
+        <div class="contact-info">
+            <p>WhatsApp: <a href="https://wa.me/77098765432" target="_blank">+7 709 876 5432</a></p>
+            <p>Телефон: <a href="tel:+77098765432">+7 709 876 5432</a></p>
+        </div>
+    </div>
+
+    
+    <div class="job-card" data-region="Астана" data-income="350000">
+        <div class="job-details">
+            <h5>Практика на КазНИУ программист-техник</h5>
+            <p>от 350 000 Т на руки</p>
+            <p>ИП BAHN TEE STYLE, Астана</p>
+        </div>
+        <button class="btn btn-contacts" onclick="toggleContacts(this)">Контакты</button>
+        <div class="contact-info">
+            <p>WhatsApp: <a href="https://wa.me/77098765432" target="_blank">+7 709 876 5432</a></p>
+            <p>Телефон: <a href="tel:+77098765432">+7 709 876 5432</a></p>
+        </div>
+    </div>
+
+    <div class="job-card" data-region="Астана" data-income="350000">
+        <div class="job-details">
+            <h5>Практика на КазАТУ программист-техник</h5>
+            <p>от 350 000 Т на руки</p>
+            <p>ИП BAHN TEE STYLE, Астана</p>
+        </div>
+        <button class="btn btn-contacts" onclick="toggleContacts(this)">Контакты</button>
+        <div class="contact-info">
+            <p>WhatsApp: <a href="https://wa.me/77011223344" target="_blank">+7 701 122 3344</a></p>
+            <p>Телефон: <a href="tel:+77011223344">+7 701 122 3344</a></p>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    // Показ/скрытие контактов
+    function toggleContacts(button) {
+        const contactInfo = button.nextElementSibling;
+        contactInfo.style.display = contactInfo.style.display === "none" || contactInfo.style.display === ""
+            ? "block"
+            : "none";
+        button.textContent = contactInfo.style.display === "block" ? "Скрыть контакты" : "Контакты";
+    }
+
+    // Фильтрация карточек
+    function applyFilters() {
+        const regionFilter = document.getElementById('region').value;
+        const incomeFilter = document.getElementById('income').value;
+        const jobCards = document.querySelectorAll('.job-card');
+
+        jobCards.forEach(card => {
+            const cardRegion = card.getAttribute('data-region');
+            const cardIncome = parseInt(card.getAttribute('data-income'), 10);
+
+            const regionMatch = !regionFilter || cardRegion === regionFilter;
+            const incomeMatch = !incomeFilter || cardIncome >= parseInt(incomeFilter, 10);
+
+            card.style.display = regionMatch && incomeMatch ? "flex" : "none";
+        });
+    } 
+        let balance = localStorage.getItem('balance') ? parseInt(localStorage.getItem('balance')) : 100;  // Загружаем баланс из LocalStorage, если он есть
+
+        // Функция для покупки рамки
+        function buyFrame(frameSrc, price) {
+            if (balance >= price) {
+                balance -= price;
+                document.getElementById('balance').innerText = balance; // Обновление баланса
+                document.getElementById('frame-img').src = frameSrc; // Установка рамки поверх аватарки
+
+                // Сохраняем рамку и баланс в LocalStorage
+                localStorage.setItem('selectedFrame', frameSrc);
+                localStorage.setItem('balance', balance);
+
+                alert("Рамка успешно установлена!");
+            } else {
+                alert("Недостаточно баллов!");
+            }
+        }
+
+        // Показ/скрытие контактов
+        function toggleContacts(button) {
+            const contactInfo = button.nextElementSibling;
+            contactInfo.style.display = contactInfo.style.display === "none" || contactInfo.style.display === "" ? "block" : "none";
+            button.textContent = contactInfo.style.display === "block" ? "Скрыть контакты" : "Контакты";
+        }
+
+        // Применение рамки и баланса при загрузке страницы
+        window.onload = function() {
+            const selectedFrame = localStorage.getItem('selectedFrame');
+            if (selectedFrame) {
+                document.getElementById('frame-img').src = selectedFrame;
+            }
+            document.getElementById('balance').innerText = balance;  // Обновляем баланс при загрузке
+        };
+</script>
+</body>
+</html>

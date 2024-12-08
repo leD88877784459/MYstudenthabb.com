@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Hub</title>
+    <style>
+        /* Удаляем белые полосы вокруг страницы */
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Градиентный фон */
+        body {
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), 
+                        url('News.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            padding-top: 80px;
+        }
+
+        /* Шапка */
+        .header {
+            background: black;
+            color: white;
+            font-size: 2rem;
+            padding: 20px;
+            text-align: left;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .profile-icon {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            border-radius: 50%;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0);
+        }
+
+        .profile-icon img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+        }
+
+        /* Секция услуг */
+        .services-container {
+            margin: 30px auto;
+            max-width: 1200px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+        }
+
+        .services-header {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .service-card {
+            background: #222;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0);
+            transition: 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0);
+        }
+
+        .service-card h3 {
+            margin: 0;
+            color: #00bcd4;
+        }
+
+        .service-card p {
+            color: #ddd;
+        }
+
+        /* Чат между пользователями */
+        .chat-container {
+            margin: 30px auto;
+            max-width: 800px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .chat-header {
+            text-align: center;
+            font-size: 2rem;
+            color: #fff;
+        }
+
+        #chat-window {
+            height: 300px;
+            overflow-y: auto;
+            background: #ffffff; /* Белый фон */
+            color: #000; /* Черный текст */
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .chat-input {
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .chat-input button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .chat-input button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка -->
+    <div class="header">STUDENT HUB</div>
+    <div class="profile-icon">
+        <img src="aa.png" alt="Иконка профиля" onclick="window.location.href='profil.html';">
+    </div>
+
+    <!-- Секция услуг -->
+    <div class="services-container">
+        <div class="services-header">Услуги</div>
+        <div class="service-card">
+            <h3>Помощь с программированием</h3>
+            <p>Помогу разобраться с задачами по Python, Java, C++.</p>
+        </div>
+        <div class="service-card">
+            <h3>Консультация по проектам</h3>
+            <p>Помощь в подготовке научных и учебных проектов.</p>
+        </div>
+        <div class="service-card">
+            <h3>Репетитор по математике</h3>
+            <p>Объясню сложные темы и помогу подготовиться к экзаменам.</p>
+        </div>
+    </div>
+
+    <!-- Чат для общения -->
+    <div class="chat-container">
+        <div class="chat-header">Чат для общения</div>
+        <div id="chat-window"></div>
+        <div class="chat-input">
+            <input type="text" id="message" placeholder="Введите сообщение...">
+            <button onclick="sendMessage()">Отправить</button>
+        </div>
+    </div>
+
+    <script>
+        // Чат между пользователями
+        const chatWindow = document.getElementById('chat-window');
+        const messageInput = document.getElementById('message');
+
+        function sendMessage() {
+            const message = messageInput.value.trim();
+            if (message) {
+                const msgDiv = document.createElement('div');
+                msgDiv.textContent = "Вы: " + message;
+                chatWindow.appendChild(msgDiv);
+                chatWindow.scrollTop = chatWindow.scrollHeight;
+                messageInput.value = "";
+            }
+        }
+    </script>
+</body>
+</html>

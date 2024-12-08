@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Магазин - Рамки и Цвета Ников</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: url('image0_0.jpg') no-repeat center center fixed;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        .header {
+            background-color: #000000;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            position: relative;
+        }
+
+        .avatar-container {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .avatar-frame-container {
+            position: relative;
+            width: 60px;
+            height: 60px;
+        }
+
+        .avatar {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .frame {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            pointer-events: none;
+        }
+
+        .nickname {
+            color: rgb(255, 255, 255);
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .balance {
+            position: absolute;
+            top: 15px;
+            left: 20px;
+            font-size: 1rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .main-container {
+            text-align: center;
+            margin: 50px auto;
+            width: 90%;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .shop-item {
+            background-color: rgb(255, 255, 255);
+            box-shadow: 0 4px 6px rgb(0, 0, 0);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            width: 200px;
+        }
+
+        .shop-item img {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 10px;
+        }
+
+        .shop-item button {
+            background-color: #000000;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .shop-item button:hover {
+            background-color: #333333;
+        }
+
+        .profile-icon {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            border-radius: 50%;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .profile-icon img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+        }
+
+        .contact-info {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-contacts {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .btn-contacts:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body onload="loadProfileData()">
+    <!-- Шапка с аватаркой, никнеймом и балансом -->
+    <div class="header">
+        Магазин
+        <div class="balance">Баллы: <span id="balance">100</span></div>
+        <div class="profile-icon">
+            <img src="aa.png" alt="Иконка профиля" class="avatar" id="avatar-img" onclick="window.location.href='profil.html';">
+            <img src="рамки/base.png" alt="Рамка" class="frame" id="frame-img">
+        </div>
+    </div>
+
+    <!-- Магазин -->
+    <div class="main-container">
+        <!-- Рамка 1 -->
+        <div class="shop-item">
+            <img src="рамки/1.png" alt="Рамка 1">
+            <p>Рамка 1</p>
+            <button onclick="buyFrame('рамки/1.png', 50)">Купить за 50 баллов</button>
+        </div>
+
+        <!-- Рамка 2 -->
+        <div class="shop-item">
+            <img src="рамки/2.png" alt="Рамка 2">
+            <p>Рамка 2</p>
+            <button onclick="buyFrame('рамки/2.png', 30)">Купить за 30 баллов</button>
+        </div>
+
+        <!-- Рамка 3 -->
+        <div class="shop-item">
+            <img src="рамки/3.png" alt="Рамка 3">
+            <p>Рамка 3</p>
+            <button onclick="buyFrame('рамки/3.png', 50)">Купить за 50 баллов</button>
+        </div>
+
+         <!-- товарка  -->
+        <div class="shop-item">
+            <img src="товары/70923415.jpg" alt="Книга">
+            <p>Книга</p>
+            <button class="btn btn-contacts" onclick="toggleContacts(this)">Контакты</button>
+        <div class="contact-info">
+            <p>WhatsApp: <a href="https://wa.me/77098765432" target="_blank">+7 709 876 5432</a></p>
+            <p>Телефон: <a href="tel:+77098765432">+7 709 876 5432</a></p>
+        </div>
+        </div>
+         <!-- товарка  -->
+         <div class="shop-item">
+            <img src="товары/Scan_06-09-2023_1640.jpg" alt="Книга">
+            <p>Книга</p>
+            <button class="btn btn-contacts" onclick="toggleContacts(this)">Контакты</button>
+            <div class="contact-info">
+                <p>WhatsApp: <a href="https://wa.me/77098765432" target="_blank">+7 709 876 5432</a></p>
+                <p>Телефон: <a href="tel:+77098765432">+7 709 876 5432</a></p>
+            </div>
+        </div>
+        <!-- товарка  -->
+        <div class="shop-item">
+            <img src="товары/1.jpg" alt="Книга">
+            <p>Книга</p>
+            <button class="btn btn-contacts" onclick="toggleContacts(this)">Контакты</button>
+            <div class="contact-info">
+                <p>WhatsApp: <a href="https://wa.me/77098765432" target="_blank">+7 709 876 5432</a></p>
+                <p>Телефон: <a href="tel:+77098765432">+7 709 876 5432</a></p>
+            </div>
+        </div>
+        <!-- товарка  -->
+        <div class="shop-item">
+            <img src="товары/2.jpg" alt="Книга">
+            <p>Книга</p>
+            <button class="btn btn-contacts" onclick="toggleContacts(this)">Контакты</button>
+            <div class="contact-info">
+                <p>WhatsApp: <a href="https://wa.me/77098765432" target="_blank">+7 709 876 5432</a></p>
+                <p>Телефон: <a href="tel:+77098765432">+7 709 876 5432</a></p>
+            </div>
+        </div>
+        <!-- товарка  -->
+        <div class="shop-item">
+            <img src="товары/3.jpg" alt="Книга">
+            <p>Книга</p>
+            <button class="btn btn-contacts" onclick="toggleContacts(this)">Контакты</button>
+            <div class="contact-info">
+                <p>WhatsApp: <a href="https://wa.me/77098765432" target="_blank">+7 709 876 5432</a></p>
+                <p>Телефон: <a href="tel:+77098765432">+7 709 876 5432</a></p>
+            </div>
+        </div>
+        <!-- товарка  -->
+        <div class="shop-item">
+            <img src="товары/4.jpg" alt="Книга">
+            <p>Книга</p>
+            <button class="btn btn-contacts" onclick="toggleContacts(this)">Контакты</button>
+            <div class="contact-info">
+                <p>WhatsApp: <a href="https://wa.me/77098765432" target="_blank">+7 709 876 5432</a></p>
+                <p>Телефон: <a href="tel:+77098765432">+7 709 876 5432</a></p>
+            </div>
+        </div>
+         <!-- товарка  -->
+         <div class="shop-item">
+            <img src="товары/5.jpg" alt="Книга">
+            <p>Книга</p>
+            <button class="btn btn-contacts" onclick="toggleContacts(this)">Контакты</button>
+            <div class="contact-info">
+                <p>WhatsApp: <a href="https://wa.me/77098765432" target="_blank">+7 709 876 5432</a></p>
+                <p>Телефон: <a href="tel:+77098765432">+7 709 876 5432</a></p>
+            </div>
+        </div>
+    </div>
+
+        <!-- Добавьте другие товары аналогично... -->
+    </div>
+
+    <script>
+        let balance = localStorage.getItem('balance') ? parseInt(localStorage.getItem('balance')) : 100;  // Загружаем баланс из LocalStorage, если он есть
+
+        // Функция для покупки рамки
+        function buyFrame(frameSrc, price) {
+            if (balance >= price) {
+                balance -= price;
+                document.getElementById('balance').innerText = balance; // Обновление баланса
+                document.getElementById('frame-img').src = frameSrc; // Установка рамки поверх аватарки
+
+                // Сохраняем рамку и баланс в LocalStorage
+                localStorage.setItem('selectedFrame', frameSrc);
+                localStorage.setItem('balance', balance);
+
+                alert("Рамка успешно установлена!");
+            } else {
+                alert("Недостаточно баллов!");
+            }
+        }
+
+        // Показ/скрытие контактов
+        function toggleContacts(button) {
+            const contactInfo = button.nextElementSibling;
+            contactInfo.style.display = contactInfo.style.display === "none" || contactInfo.style.display === "" ? "block" : "none";
+            button.textContent = contactInfo.style.display === "block" ? "Скрыть контакты" : "Контакты";
+        }
+
+        // Применение рамки и баланса при загрузке страницы
+        window.onload = function() {
+            const selectedFrame = localStorage.getItem('selectedFrame');
+            if (selectedFrame) {
+                document.getElementById('frame-img').src = selectedFrame;
+            }
+            document.getElementById('balance').innerText = balance;  // Обновляем баланс при загрузке
+
+            // Загружаем аватар и никнейм
+            const avatar = localStorage.getItem('avatar');
+            const nickname = localStorage.getItem('nickname');
+
+            if (avatar) {
+                document.getElementById('avatar-img').src = avatar;
+            }
+            if (nickname) {
+                document.getElementById('nickname').textContent = nickname;
+            }
+        };
+    </script>
+</body>
+</html>
